@@ -1,0 +1,103 @@
+---
+title: "Beta-diversity"
+author: "Sterling Wright"
+date: "2023-11-01"
+output:
+  pdf_document: default
+  html_document:
+    df_print: paged
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(tidy.opts = list(width.cutoff = 60), tidy = TRUE)
+```
+
+Load the necessary libraries 
+
+```{r}
+library(ggpubr)
+library(Tjazi)
+library(scater)
+```
+
+```{r tidy=TRUE}
+pseudocount<-1
+```
+
+```{r tidy=TRUE}
+#### Niger PCoA analysis ####
+
+Gobero_species<-read.csv("ExportedTables-Gobero-species-samples.qza/Gobero-species.csv", row.names = 1, header = TRUE, check.names = FALSE)
+metadata2<-read.table("Library_METADATA.txt", header = TRUE, check.names = TRUE)
+
+Gobero_species_pseudo <- Gobero_species + pseudocount
+
+Gobero_sp_clr<-clr_lite(counts = Gobero_species_pseudo, method = "const", samples_are = "cols")
+
+df<-calculateMDS(Gobero_sp_clr, method = "euclidean")
+
+euclidean_pcoa_df <- data.frame(pcoa1 = df[,1],
+                                pcoa2 = df[,2])
+
+eucl_Lib_pcoa_df<-cbind(euclidean_pcoa_df, metadata2$LibraryMethod, metadata2$ExtractionType)
+
+plot1<-ggplot(data = eucl_Lib_pcoa_df,
+       aes(x=pcoa1, y=pcoa2,
+           color=eucl_Lib_pcoa_df$`metadata2$LibraryMethod`,
+           shape=eucl_Lib_pcoa_df$`metadata2$ExtractionType`)) +
+  geom_point() +
+  labs(x = "Coordinate 1",
+       y = "Coordinate 2",
+       title = "PCoA for Niger Samples") +  
+  theme(title = element_text(size = 12),
+        panel.grid = element_blank()) +
+  scale_color_manual(name = "Library Method",
+                     values = c("DoubleStranded" = "red", "SingleStranded" = "blue"),
+                     labels = c("Double Stranded", "Single Stranded")) +
+  scale_shape_manual(name = "Extraction Method",
+                     values = c("PB_Dabney" = 16, "QG_Rohland" = 17),
+                     labels = c("PB method", "QG method"))
+
+#### Hungarian PCoA analysis ####
+
+Hungarian_species<-read.csv("Hungary-species-samples.qza.csv", row.names = 1, header = TRUE, check.names = FALSE)
+
+Hungarian_species_pseudo <- Hungarian_species + pseudocount
+
+Hungarian_sp_clr<-clr_lite(counts = Hungarian_species_pseudo, method = "const", samples_are = "cols")
+
+df2<-calculateMDS(Hungarian_sp_clr, method = "euclidean")
+
+euclidean_pcoa_df2 <- data.frame(pcoa1 = df2[,1],
+                                pcoa2 = df2[,2])
+
+eucl_Lib_pcoa_df2<-cbind(euclidean_pcoa_df2, metadata2$LibraryMethod, metadata2$ExtractionType)
+
+plot2<-ggplot(data = eucl_Lib_pcoa_df2,
+       aes(x=pcoa1, y=pcoa2,
+           color=`metadata2$LibraryMethod`,
+           shape=`metadata2$ExtractionType`)) +
+  geom_point() +
+  labs(x = "Coordinate 1",
+       y = "Coordinate 2",
+       title = "PCoA for Hungarian Samples") +  
+  theme(title = element_text(size = 12),
+        panel.grid = element_blank()) +
+  scale_color_manual(name = "Library Method",
+                     values = c("DoubleStranded" = "red", "SingleStranded" = "blue"),
+                     labels = c("Double Stranded", "Single Stranded")) +
+  scale_shape_manual(name = "Extraction Method",
+                     values = c("PB_Dabney" = 16, "QG_Rohland" = 17),
+                     labels = c("PB method", "QG method"))
+```
+
+Plot the results
+
+```{r fig.cap= "PCoA"}
+ggarrange(plot1, plot2,
+          labels = c("A", "B"),
+          common.legend = TRUE,
+          legend = "bottom",
+          ncol=2)
+```
+
