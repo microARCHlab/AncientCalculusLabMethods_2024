@@ -1,0 +1,67 @@
+---
+title: "SourceTracker-analysis"
+author: "Sterling Wright"
+date: "2023-11-01"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+Load the necessary libraries 
+```{r message=FALSE, warning=FALSE}
+library(Maaslin2)
+```
+
+Load the data from where you have saved the files.
+
+```{r, tidy=TRUE, tidy.opts=list(width.cutoff=600)}
+### Gobero
+data<- read.csv("Gobero-ST-RESULTS.csv", header = TRUE)
+
+ST_results<-melt(data, id=c("SampleID"))
+
+plot1<-ggplot() + geom_bar(aes(y = ST_results$value, x = ST_results$SampleID, fill = ST_results$variable),
+                    stat = "identity") +
+  labs(y = "Proportion") +
+  theme_bw() +
+  scale_fill_manual(name = "Environment", values = c("tan4", "lightskyblue", "mediumvioletred", "darkseagreen","lightsalmon3", "gray44")) +
+  theme(axis.ticks.x = element_blank(),
+        axis.text.x = element_text(angle = 70, hjust = 1, size =12),
+        text = element_text(size = 20),
+        panel.grid = element_blank(),
+        panel.background = element_blank(),
+        axis.title.x = element_blank(),
+        axis.title.y = element_blank())
+
+### Hungary 
+data2<- read.csv("sourcetracker-results-Hungary.csv", header = TRUE)
+
+ST_results2<-melt(data2, id=c("SampleID"))
+
+plot2<-ggplot() + geom_bar(aes(y = ST_results2$value, x = ST_results2$SampleID, fill = ST_results2$variable),
+                           stat = "identity") +
+  labs(y = "Proportion") +
+  theme_bw() +
+  scale_fill_manual(name = "Environment", values = c("tan4", "lightskyblue", "mediumvioletred", "darkseagreen","lightsalmon3", "gray44")) +
+  theme(axis.ticks.x = element_blank(),
+        axis.text.x = element_text(angle = 70, hjust = 1, size =12),
+        text = element_text(size = 20),
+        panel.grid = element_blank(),
+        panel.background = element_blank(),
+        axis.title.x = element_blank()) 
+
+```
+
+# Create the figure 
+
+```{r fig.cap= "SourceTracker2 results"}
+ggarrange(plot2, plot1,
+          labels = c("A", "B"),
+          common.legend = TRUE,
+          legend = "bottom",
+          ncol=2)
+```
+
+A) Samples from Hungary and B) Samples from Niger
