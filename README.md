@@ -33,5 +33,8 @@ install.packages(c("ggplot2", "dplyr", "phyloseq", "vegan", "reshape2"))
 If you use this repository or its resources in your research, please cite:
 XYZ
 
+### Acknowledgments 
+
+We extend our gratitude to Professor Alan Cooper for his contributions to this study. We also thank Kitt Köhler, Anett Osztás, Eszter Bánffy, Tibor Marton and Krisztián Oross from the Research Centre of the Humanities, Institute of Archaeology, for their assistance and support. A. O., E. B., T. M., and K. O. played pivotal roles in the excavation of the samples from Hungary. 
 
 
