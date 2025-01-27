@@ -9,8 +9,11 @@ The study focuses on:
 
 ## Folders 
 01_data/
+
 02_results/
+
 03_scripts/
+
 04_docs/
 
 ## Installation and Dependencies
