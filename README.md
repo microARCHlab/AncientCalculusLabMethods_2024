@@ -8,13 +8,10 @@ The study focuses on:
 - Comparing the efficiency of library preparation methods for ancient samples.
 
 ## Folders 
-01_data/
-
-02_results/
-
-03_scripts/
-
-04_docs/
+- 01_data/
+- 02_results/
+- 03_scripts/
+- 04_docs/
 
 ## Installation and Dependencies
 To reproduce the analyses and run the scripts in this repository, you will need the following software and packages:
