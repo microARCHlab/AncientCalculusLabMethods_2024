@@ -7,21 +7,11 @@ The study focuses on:
 - Assessing the level of contamination and microbial diversity.
 - Comparing the efficiency of library preparation methods for ancient samples.
 
-├── data/
-│   ├── raw/               # Raw sequencing data and metadata
-│   ├── processed/         # Processed data files (e.g., filtered sequences, feature tables)
-├── results/
-│   ├── figures/           # Figures generated from analysis
-│   ├── tables/            # Summary tables of results
-├── scripts/
-│   ├── preprocessing/     # Scripts for preprocessing raw data
-│   ├── analysis/          # Scripts for comparative analysis
-│   ├── visualization/     # Scripts for generating figures
-├── docs/
-│   ├── protocol/          # Protocols for DNA extraction and library preparation
-│   ├── references/        # Relevant references and literature
-├── README.md              # Project overview and instructions
-└── LICENSE                # Licensing information
+## Folders 
+01_data/
+02_results/
+03_scripts/
+04_docs/
 
 ## Installation and Dependencies
 To reproduce the analyses and run the scripts in this repository, you will need the following software and packages:
