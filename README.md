@@ -22,7 +22,12 @@ QIIME 2: For microbiome analysis and taxonomic classification.
 R: For statistical analyses and visualization.
 
 ##### R packages 
-install.packages(c("ggplot2", "dplyr", "phyloseq", "vegan", "reshape2"))
+install.packages(c("ggplot2", "phyloseq", "vegan", "reshape2"))
+library(phyloseq); packageVersion("phyloseq") # Version ‘1.50.0’
+library(ggplot2);packageVersion("ggplot2") # Version ‘3.5.1’)
+library(vegan); packageVersion("vegan") # Version ‘2.6.10’
+library(decontam); packageVersion("decontam") # Version ‘1.26.0’
+
 
 ## Key Results
 1. DNA Yield: DNA varies according to wet lab protocol. 
